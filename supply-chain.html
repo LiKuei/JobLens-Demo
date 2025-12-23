@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobLens - 供應鏈分析</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .chart-container { position: relative; height: 300px; width: 100%; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
+                <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 text-2xl"></i>
+                <span class="text-xl font-bold tracking-wider">JobLens <span class="text-xs font-normal text-slate-400">beta</span></span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="#supply-chain-overview" class="hover:text-emerald-400 transition">供應鏈概覽</a>
+                <a href="#safety" class="hover:text-emerald-400 transition">工安風險分析</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-10 px-4">
+        <div class="container mx-auto text-center max-w-2xl">
+            <h1 class="text-2xl md:text-3xl font-bold mb-3">半導體產業供應鏈</h1>
+            <p class="text-slate-400 mb-6 text-sm">從上游到下游，全面透視產業鏈夥伴</p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-8 space-y-12">
+        <section id="supply-chain-overview" class="scroll-mt-24">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                <span class="bg-blue-500 w-2 h-8 rounded-full"></span> 供應鏈結構
+            </h3>
+            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-100">
+                <div id="main_ic_panel" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="chain flex flex-col items-center">
+                        <div class="chain-title-panel text-lg font-bold text-slate-700 mb-4">上游</div>
+                        <div class="chain-company flex items-center justify-center space-x-2 mb-4">
+                            <div id="ic_link_DC00" class="company-chain-panel bg-emerald-100 text-emerald-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-emerald-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_DC00')">IP設計<br>/IC設計<br>代工服務</div>
+                            <i class="fa-solid fa-arrow-right text-slate-500"></i>
+                            <div id="ic_link_D100" class="company-chain-panel bg-blue-100 text-blue-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-blue-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D100')">IC設計</div>
+                        </div>
+                    </div>
+                    <div class="chain flex flex-col items-center">
+                        <div class="chain-title-panel text-lg font-bold text-slate-700 mb-4">中游</div>
+                        <div class="chain-company flex flex-col items-center mb-4">
+                            <div id="ic_link_D300" class="company-chain-panel bg-purple-100 text-purple-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-purple-200 transition-colors duration-200 w-full mb-2" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D300')">IC/晶圓製造</div>
+                            <i class="fa-solid fa-arrow-down text-slate-500 mb-2"></i>
+                            <div class="chain-group flex justify-center space-x-2">
+                                <div id="ic_link_D400" class="company-chain-panel bg-yellow-100 text-yellow-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-yellow-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D400')">生產製程<br>及<br>檢測設備</div>
+                                <div id="ic_link_D200" class="company-chain-panel bg-yellow-100 text-yellow-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-yellow-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D200')">光罩</div>
+                                <div id="ic_link_D500" class="company-chain-panel bg-yellow-100 text-yellow-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-yellow-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D500')">化學品</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chain flex flex-col items-center">
+                        <div class="chain-title-panel text-lg font-bold text-slate-700 mb-4">下游</div>
+                        <div class="chain-company flex flex-col items-center mb-4">
+                            <div id="ic_link_D900" class="company-chain-panel bg-red-100 text-red-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-red-200 transition-colors duration-200 w-full mb-2" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D900')">IC封裝測試</div>
+                            <i class="fa-solid fa-arrow-down text-slate-500 mb-2"></i>
+                            <div class="chain-group flex justify-center space-x-2 mb-4">
+                                <div id="ic_link_D600" class="company-chain-panel bg-orange-100 text-orange-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-orange-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D600')">生產製程<br>及<br>檢測設備</div>
+                                <div id="ic_link_D700" class="company-chain-panel bg-orange-100 text-orange-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-orange-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D700')">基板</div>
+                                <div id="ic_link_D800" class="company-chain-panel bg-orange-100 text-orange-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-orange-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D800')">導線架</div>
+                            </div>
+                            <i class="fa-solid fa-arrow-right text-slate-500 mb-2"></i>
+                            <div class="flex flex-col items-center space-y-2">
+                                <div id="ic_link_DA00" class="company-chain-panel bg-green-100 text-green-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-green-200 transition-colors duration-200 w-full" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_DA00')">IC模組</div>
+                                <div id="ic_link_DB00" class="company-chain-panel bg-green-100 text-green-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-green-200 transition-colors duration-200 w-full" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_DB00')">IC通路</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="company-lists" class="mt-12 space-y-6">
+                    <h4 class="text-xl font-bold text-slate-700">產業公司列表</h4>
+                    <div id="companyList_DC00" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">IP設計/IC設計代工服務 <span class="text-sm font-normal text-slate-500">(共22家)</span></p>
+                        <div class="company-details pt-4">
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國上市公司 (7家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <a href="company_basic.php?stk_code=2401" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">凌陽</a>
+                                <a href="company_basic.php?stk_code=3035" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">智原</a>
+                                <a href="company_basic.php?stk_code=3443" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">創意</a>
+                                <a href="company_basic.php?stk_code=5222" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">全訊</a>
+                                <a href="company_basic.php?stk_code=6423" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">億而得-創</a>
+                                <a href="company_basic.php?stk_code=6533" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">晶心科</a>
+                                <a href="company_basic.php?stk_code=6695" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">芯鼎</a>
+                            </div>
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">外國上市公司 (1家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <a href="company_basic.php?stk_code=3661" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">世芯-KY</a>
+                            </div>
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國上櫃公司 (6家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <a href="company_basic.php?stk_code=3339" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">泰谷</a>
+                                <a href="company_basic.php?stk_code=3529" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">力旺</a>
+                                <a href="company_basic.php?stk_code=6643" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">M31</a>
+                                <a href="company_basic.php?stk_code=8054" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">安國</a>
+                                <a href="company_basic.php?stk_code=8227" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">巨有科技</a>
+                                <a href="company_basic.php?stk_code=8299" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">群聯</a>
+                            </div>
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國興櫃公司 (4家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <a href="company_basic.php?stk_code=6786" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">芯測</a>
+                                <a href="company_basic.php?stk_code=6842" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">一元素</a>
+                                <a href="company_basic.php?stk_code=7707" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">益芯科</a>
+                                <a href="company_basic.php?stk_code=7796" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">擷發科</a>
+                            </div>
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">知名外國企業 (4家)</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="http://www.arm.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">安謀</a>
+                                <a href="http://www.cadence.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">益華</a>
+                                <a href="http://imgtec.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">Imagination</a>
+                                <a href="http://www.synopsys.com/home.aspx" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">新思科技</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="companyList_D100" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">IC設計 <span class="text-sm font-normal text-slate-500">(共211家)</span></p>
+                        <div class="company-details pt-4"><h5 class="text-md font-semibold text-slate-600 mb-2">IC設計... (請使用原始檔案內容)</h5></div>
+                    </div>
+                    <div id="companyList_D200" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">光罩 <span class="text-sm font-normal text-slate-500">(共5家)</span></p>
+                        <div class="company-details pt-4">
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國上市公司 (2家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-4">
+                                <a href="company_basic.php?stk_code=2338" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">光罩</a>
+                                <a href="company_basic.php?stk_code=2438" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">翔耀</a>
+                            </div>
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">知名外國企業 (3家)</h5>
+                            <div class="flex flex-wrap gap-2">
+                                <a href="https://www.dnp.co.jp/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">大日本印刷</a>
+                                <a href="http://www.photronics.com/plab/photronics/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">豐創</a>
+                                <a href="http://www.toppan.co.jp/english/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">凸版印刷</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="companyList_D300" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">IC/晶圓製造 <span class="text-sm font-normal text-slate-500">(共50家)</span></p>
+                        <div class="company-details pt-4">
+                            <h5 class="text-md font-semibold text-slate-600 mb-2">IC/晶圓製造</h5>
+                            <div class="space-y-4">
+                                <div class="sub-section">
+                                    <h6 class="text-sm font-semibold text-slate-500 mb-2">晶圓製造</h6>
+                                    <p class="text-xs font-semibold text-slate-500 mb-1">本國上市公司(15家)</p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <a href="company_basic.php?stk_code=2303" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">聯電</a>
+                                        <a href="search.html" class="bg-emerald-100 hover:bg-emerald-200 text-emerald-800 text-sm px-3 py-1 rounded-full transition-colors duration-150 font-bold border border-emerald-300">台積電</a>
+                                        <a href="company_basic.php?stk_code=2337" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">旺宏</a>
+                                        <a href="company_basic.php?stk_code=2340" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">台亞</a>
+                                        <a href="company_basic.php?stk_code=2344" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">華邦電</a>
+                                        <a href="company_basic.php?stk_code=2371" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">大同</a>
+                                        <a href="company_basic.php?stk_code=2408" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">南亞科</a>
+                                        <a href="company_basic.php?stk_code=2434" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">統懋</a>
+                                        <a href="company_basic.php?stk_code=2455" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">全新</a>
+                                        <a href="company_basic.php?stk_code=3016" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">嘉晶</a>
+                                        <a href="company_basic.php?stk_code=3532" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">台勝科</a>
+                                        <a href="company_basic.php?stk_code=4919" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">新唐</a>
+                                        <a href="company_basic.php?stk_code=5222" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">全訊</a>
+                                        <a href="company_basic.php?stk_code=6770" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">力積電</a>
+                                        <a href="company_basic.php?stk_code=8028" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">昇陽半導體</a>
+                                    </div>
+                                    <p class="text-xs font-semibold text-slate-500 mb-1">本國上櫃公司(7家)</p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <a href="company_basic.php?stk_code=3105" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">穩懋</a>
+                                        <a href="company_basic.php?stk_code=3707" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">漢磊</a>
+                                        <a href="company_basic.php?stk_code=5347" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">世界</a>
+                                        <a href="company_basic.php?stk_code=5483" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">中美晶</a>
+                                        <a href="company_basic.php?stk_code=6182" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">合晶</a>
+                                        <a href="company_basic.php?stk_code=6488" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">環球晶</a>
+                                        <a href="company_basic.php?stk_code=8086" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">宏捷科</a>
+                                    </div>
+                                    <p class="text-xs font-semibold text-slate-500 mb-1">外國上櫃公司(1家)</p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <a href="company_basic.php?stk_code=4991" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">環宇-KY</a>
+                                    </div>
+                                    <p class="text-xs font-semibold text-slate-500 mb-1">知名外國企業(3家)</p>
+                                    <div class="flex flex-wrap gap-2 mb-2">
+                                        <a href="https://gf.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">格羅方德</a>
+                                        <a href="http://www.samsung.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">三星電子</a>
+                                        <a href="http://www.smics.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">中芯國際</a>
+                                    </div>
+                                </div>
+                                </div>
+                        </div>
+                    </div>
+
+                    <div id="companyList_D400" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">生產製程及檢測設備...</p>
+                        </div>
+                    <div id="companyList_D500" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">化學品...</p>
+                    </div>
+                    <div id="companyList_D600" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">生產製程及檢測設備(下游)...</p>
+                    </div>
+                    <div id="companyList_D700" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">基板...</p>
+                    </div>
+                    <div id="companyList_D800" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">導線架...</p>
+                    </div>
+                    <div id="companyList_D900" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">IC封裝測試...</p>
+                    </div>
+                    <div id="companyList_DA00" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">IC模組...</p>
+                    </div>
+                    <div id="companyList_DB00" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
+                        <p class="font-bold text-slate-700 text-lg mb-2">IC通路...</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="safety" class="scroll-mt-24 pt-8 border-t border-slate-200">
+            <div class="flex justify-between items-center mb-6">
+                <div class="flex items-center gap-2">
+                    <span class="bg-orange-500 w-1.5 h-6 rounded-full"></span>
+                    <h3 class="text-xl font-bold text-slate-800">產業工安風險大數據</h3>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-8">
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 border-b border-slate-100 pb-4">
+                    <div>
+                        <h4 class="text-lg font-bold text-emerald-600 mb-1">電子零組件製造業</h4>
+                        <p class="text-slate-400 text-xs">資料來源：職安署通報數據 (模擬資料庫)</p>
+                    </div>
+                    
+                    <div class="mt-4 md:mt-0 flex gap-3">
+                        <div class="flex bg-slate-50 rounded-lg p-1 border border-slate-200">
+                            <button onclick="setSafetyType('body')" id="btn-type-body" class="px-4 py-1.5 text-xs font-bold bg-emerald-500 text-white rounded shadow transition">受傷部位</button>
+                            <button onclick="setSafetyType('disaster')" id="btn-type-disaster" class="px-4 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-200 rounded transition">災害類型</button>
+                        </div>
+                        <div class="relative">
+                            <select id="safety-year-select" onchange="updateSafetyChart()" class="bg-white text-slate-700 text-xs font-bold py-1.5 pl-3 pr-8 rounded border border-slate-300 focus:outline-none focus:border-emerald-500 cursor-pointer hover:bg-slate-50">
+                                <option value="2024">2024 年</option>
+                                <option value="2023">2023 年</option>
+                                <option value="2022">2022 年</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 text-xs pointer-events-none"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-col md:flex-row gap-10">
+                    <div class="md:w-1/3 flex flex-col justify-center space-y-4">
+                        <div class="bg-slate-50 p-5 rounded-xl border border-slate-200">
+                            <p class="text-emerald-600 text-xs font-bold uppercase mb-2 flex items-center">
+                                <i class="fa-solid fa-circle-exclamation mr-2"></i> <span id="insight-title">高風險部位</span>
+                            </p>
+                            <p class="text-3xl font-bold mb-2 text-slate-800" id="insight-value">手部 <span class="text-base font-normal text-slate-500">(45%)</span></p>
+                            <p class="text-sm text-slate-600" id="insight-desc">手指被夾、割傷為該年度最頻繁意外。</p>
+                        </div>
+                        <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm">
+                            <p class="text-blue-600 text-xs font-bold uppercase mb-2 flex items-center">
+                                <i class="fa-solid fa-chart-line mr-2"></i> 年度趨勢
+                            </p>
+                            <p class="text-sm text-slate-600 leading-relaxed" id="insight-trend">
+                                與前一年相比，案件數<span class="text-red-500 font-bold mx-1">微幅上升 2%</span>，需注意機台操作安全。
+                            </p>
+                        </div>
+                    </div>
+                    <div class="md:w-2/3 h-64 chart-container">
+                        <canvas id="safetyChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-200 mt-12 pt-8 text-center text-xs text-slate-400 pb-8">
+        <p>JobLens 2025 Beta | 本系統使用政府資料開放平臺 (ESG資訊揭露、職安署) 數據</p>
+    </footer>
+
+    <script src="search.js"></script>
+    <script>
+        // 原本的列表切換功能
+        function toggleCompanyList(listId) {
+            const allLists = document.querySelectorAll('.company-list');
+            allLists.forEach(list => {
+                if (list.id !== listId) list.classList.add('hidden');
+            });
+            const companyListDiv = document.getElementById(listId);
+            if (companyListDiv) companyListDiv.classList.toggle('hidden');
+        }
+
+        // --- 工安分析圖表程式碼 (Chart.js Logic) ---
+        const safetyData = {
+            '2024': {
+                body: { labels: ['手部', '足部', '頭部', '眼部', '其他'], data: [108, 25, 10, 8, 15], insight: { title: '高風險部位', value: '手部 (45%)', desc: '手指被夾、割傷為該年度最頻繁意外。', trend: '與前一年相比，案件數<span class="text-red-500 font-bold">微幅上升 2%</span>，需注意機台操作安全。' } },
+                disaster: { labels: ['被夾/被捲', '跌倒', '墜落', '接觸有害物', '火災'], data: [85, 30, 25, 20, 5], insight: { title: '主要災害類型', value: '被夾/被捲 (51%)', desc: '動力機械操作不當為主要肇因。', trend: '佔比持續居高不下，為該產業長期痛點。' } }
+            },
+            '2023': {
+                body: { labels: ['手部', '足部', '頭部', '眼部', '其他'], data: [100, 28, 12, 5, 20], insight: { title: '高風險部位', value: '手部 (42%)', desc: '手部傷害略少於 2024，但仍是首位。', trend: '眼部傷害案件較前年<span class="text-emerald-500 font-bold">下降 10%</span>，護目鏡推廣見效。' } },
+                disaster: { labels: ['被夾/被捲', '跌倒', '墜落', '接觸有害物', '火災'], data: [75, 35, 28, 18, 2], insight: { title: '主要災害類型', value: '被夾/被捲 (48%)', desc: '多發生於產線維修保養期間。', trend: '跌倒案件數異常增加，需注意地面溼滑問題。' } }
+            },
+            '2022': {
+                body: { labels: ['手部', '足部', '頭部', '眼部', '其他'], data: [95, 20, 15, 10, 18], insight: { title: '高風險部位', value: '手部 (40%)', desc: '疫情期間產線人力吃緊，疲勞操作導致。', trend: '整體職災件數為近三年最低。' } },
+                disaster: { labels: ['被夾/被捲', '跌倒', '墜落', '接觸有害物', '火災'], data: [70, 25, 30, 15, 1], insight: { title: '主要災害類型', value: '被夾/被捲 (45%)', desc: '新手操作員訓練不足導致意外。', trend: '墜落事故頻傳，多為高處作業未扣安全帶。' } }
+            }
+        };
+
+        let currentSafetyType = 'body'; 
+        let currentSafetyChart = null;
+
+        function setSafetyType(type) {
+            currentSafetyType = type;
+            const activeClass = "px-4 py-1.5 text-xs font-bold bg-emerald-500 text-white rounded shadow transition";
+            const inactiveClass = "px-4 py-1.5 text-xs font-bold text-slate-500 hover:bg-slate-200 rounded transition";
+            document.getElementById('btn-type-body').className = type === 'body' ? activeClass : inactiveClass;
+            document.getElementById('btn-type-disaster').className = type === 'disaster' ? activeClass : inactiveClass;
+            updateSafetyChart();
+        }
+
+        function updateSafetyChart() {
+            const year = document.getElementById('safety-year-select').value;
+            const dataSet = safetyData[year][currentSafetyType];
+            
+            document.getElementById('insight-title').innerHTML = currentSafetyType === 'body' ? '高風險部位' : '主要災害類型';
+            document.getElementById('insight-value').innerHTML = dataSet.insight.value;
+            document.getElementById('insight-desc').innerText = dataSet.insight.desc;
+            document.getElementById('insight-trend').innerHTML = dataSet.insight.trend;
+
+            const ctx = document.getElementById('safetyChart').getContext('2d');
+            if (currentSafetyChart) currentSafetyChart.destroy();
+
+            currentSafetyChart = new Chart(ctx, {
+                type: 'bar', 
+                data: {
+                    labels: dataSet.labels,
+                    datasets: [{
+                        label: '案件數量',
+                        data: dataSet.data,
+                        backgroundColor: currentSafetyType === 'body' ? '#10b981' : '#3b82f6',
+                        borderRadius: 4,
+                        barThickness: 30
+                    }]
+                },
+                options: {
+                    indexAxis: 'y', 
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { color: 'rgba(0,0,0,0.05)' }, ticks: { color: '#94a3b8' } },
+                        y: { grid: { display: false }, ticks: { color: '#64748b', font: { family: "'Noto Sans TC', sans-serif", weight: 'bold' } } }
+                    }
+                }
+            });
+        }
+        // Initialize Safety Chart
+        updateSafetyChart();
+    </script>
+</body>
+</html>

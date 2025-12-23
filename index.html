@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JobLens - 全方位職場透視系統</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; }
+        .hover-card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="text-slate-800">
+
+    <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 text-2xl"></i>
+                <span class="text-xl font-bold tracking-wider">JobLens <span class="text-xs font-normal text-slate-400">beta</span></span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="#" class="text-emerald-400">首頁搜尋</a>
+                <a href="supply-chain.html" class="hover:text-emerald-400 transition">產業情報</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="bg-gradient-to-r from-slate-800 to-slate-900 text-white py-20 px-4">
+        <div class="container mx-auto text-center max-w-3xl">
+            <h1 class="text-3xl md:text-5xl font-bold mb-6">看見真實數據，拒絕資訊不對稱</h1>
+            <p class="text-slate-400 mb-10 text-lg">整合證交所 ESG 揭露與職安署大數據，提供最真實的薪資與風險情報。</p>
+            
+            <div class="relative max-w-xl mx-auto mb-16">
+                <input type="text" placeholder="輸入公司代號或名稱 (例如：2330, 台積電)" 
+                       class="w-full p-4 pl-6 rounded-full text-slate-900 shadow-2xl focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition text-lg">
+                <button onclick="window.location.href='search.html'" 
+                        class="absolute right-2 top-2 bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-2.5 rounded-full transition font-bold text-lg shadow-lg">
+                    透視
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="container mx-auto px-4 py-16 -mt-10 relative z-10">
+        <h3 class="text-2xl font-bold text-center mb-8 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-layer-group text-blue-500"></i> 或者，從產業開始探索
+        </h3>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            
+            <a href="supply-chain.html" class="block group">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 transition-all duration-300 hover:shadow-2xl hover-card cursor-pointer h-full">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 text-2xl mb-4 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class="fa-solid fa-microchip"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2 group-hover:text-blue-600">半導體產業</h4>
+                    <p class="text-slate-500 text-sm mb-4">包含 IC 設計、晶圓代工、封裝測試。台灣核心戰略產業。</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">高薪資</span>
+                        <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">高技術</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="#" class="block group">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 transition-all duration-300 hover:shadow-2xl hover-card cursor-pointer h-full opacity-60">
+                    <div class="w-14 h-14 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 text-2xl mb-4">
+                        <i class="fa-solid fa-ship"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">航運與運輸</h4>
+                    <p class="text-slate-500 text-sm mb-4">包含貨櫃航運、航空運輸、物流倉儲。景氣循環顯著。</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">高獎金</span>
+                        <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">輪班制</span>
+                    </div>
+                    <div class="mt-2 text-xs text-slate-400 text-center">(建置中)</div>
+                </div>
+            </a>
+
+            <a href="#" class="block group">
+                <div class="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 transition-all duration-300 hover:shadow-2xl hover-card cursor-pointer h-full opacity-60">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center text-yellow-600 text-2xl mb-4">
+                        <i class="fa-solid fa-coins"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-2">金融保險</h4>
+                    <p class="text-slate-500 text-sm mb-4">包含金控、銀行、壽險、證券。福利穩定且制度完善。</p>
+                    <div class="flex gap-2">
+                        <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">穩定</span>
+                        <span class="text-xs bg-slate-100 text-slate-500 px-2 py-1 rounded">行政職</span>
+                    </div>
+                    <div class="mt-2 text-xs text-slate-400 text-center">(建置中)</div>
+                </div>
+            </a>
+
+        </div>
+    </section>
+
+    <footer class="border-t border-slate-200 mt-12 py-8 text-center text-xs text-slate-400">
+        <p>JobLens 2025 Beta | 本系統使用政府資料開放平臺數據</p>
+    </footer>
+
+</body>
+</html>
