@@ -10,8 +10,6 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; background-color: #f8fafc; }
-        .table-row-anim { transition: all 0.3s ease; }
-        .table-row-anim:hover { transform: scale(1.01); z-index: 10; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
         .input-focus-effect:focus { box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.2); border-color: #10b981; }
     </style>
 </head>
@@ -25,8 +23,6 @@
             </div>
             <div class="hidden md:flex gap-6 text-sm font-medium">
                 <a href="supply-chain.html" class="hover:text-emerald-400 transition">產業鏈</a>
-                <a href="#salary" class="hover:text-emerald-400 transition">薪資透視</a>
-                <a href="#safety" class="hover:text-emerald-400 transition">工安分析</a>
                 <a href="reviews.html" class="hover:text-emerald-400 transition">評論</a>
             </div>
         </div>
@@ -58,13 +54,10 @@
             
             <div class="mt-6 md:mt-0 flex flex-col md:flex-row items-end md:items-center gap-3">
                 <a href="supply-chain.html" class="bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm flex items-center gap-2 group border border-blue-200">
-                    <i class="fa-solid fa-sitemap"></i> 
-                    查看所屬產業鏈
+                    <i class="fa-solid fa-sitemap"></i> 查看所屬產業鏈
                 </a>
-
                 <a href="reviews.html" class="bg-purple-100 text-purple-700 hover:bg-purple-600 hover:text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm flex items-center gap-2 group">
-                    <i class="fa-solid fa-robot group-hover:animate-bounce"></i> 
-                    查看 AI 輿情分析
+                    <i class="fa-solid fa-robot group-hover:animate-bounce"></i> 查看 AI 輿情分析
                 </a>
             </div>
         </div>
@@ -73,7 +66,6 @@
             <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
                 <span class="bg-emerald-500 w-2 h-8 rounded-full"></span> 最新職缺與徵才管道
             </h3>
-
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                 <a href="https://careers.tsmc.com/zh_TW/careers/SearchJobs" target="_blank" class="block group">
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-center justify-between hover:shadow-md hover:border-emerald-300 transition-all">
@@ -91,7 +83,6 @@
                         </div>
                     </div>
                 </a>
-
                 <a href="https://www.104.com.tw/company/a5h92m0?jobsource=google" target="_blank" class="block group">
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6 flex items-center justify-between hover:shadow-md hover:border-orange-300 transition-all">
                         <div class="flex items-center gap-4">
@@ -109,7 +100,6 @@
                     </div>
                 </a>
             </div>
-
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden">
                 <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                     <h4 class="font-bold text-slate-700">🔥 熱門推薦職缺</h4>
@@ -232,7 +222,6 @@
                         <p class="text-4xl font-bold text-slate-800" id="safety-count">-</p>
                         <p class="text-xs text-slate-400 mt-2">人</p>
                     </div>
-
                     <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 flex flex-col items-center justify-center text-center">
                         <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl mb-3">
                             <i class="fa-solid fa-percent"></i>
@@ -241,7 +230,6 @@
                         <p class="text-4xl font-bold text-slate-800" id="safety-rate">-</p>
                         <p class="text-xs text-slate-400 mt-2">占員工總人數</p>
                     </div>
-
                     <div class="bg-red-50 p-6 rounded-xl border border-red-100 flex flex-col items-center justify-center text-center">
                         <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mb-3">
                             <i class="fa-solid fa-fire"></i>
@@ -253,56 +241,107 @@
                 </div>
             </div>
         </section>
-
-        <section id="leaderboard" class="scroll-mt-24">
-            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <span class="bg-blue-500 w-2 h-8 rounded-full"></span> 超級比一比：<span id="lb-title-dynamic" class="text-blue-600">台積電 vs 同產業</span>
-            </h3>
-            <div class="bg-white rounded-xl shadow-lg overflow-hidden border border-slate-100">
-                <div class="p-4 bg-slate-100 border-b border-slate-200 flex flex-col lg:flex-row gap-4 justify-between items-center">
-                    <div class="flex items-center gap-2 w-full lg:w-auto">
-                        <label class="text-xs font-bold text-slate-500 uppercase whitespace-nowrap"><i class="fa-solid fa-filter mr-1"></i> 比較項目</label>
-                        <select id="filter-metric" onchange="renderLeaderboard()" class="w-full lg:w-64 p-2 rounded border border-slate-300 text-sm focus:ring-2 focus:ring-blue-500 focus:outline-none shadow-sm cursor-pointer">
-                            <option value="非擔任主管之全時員工薪資中位數(仟元/人)">非擔任主管薪資中位數</option>
-                            <option value="非擔任主管職務之全時員工薪資平均數(仟元/人)">非擔任主管薪資平均數</option>
-                            <option value="員工薪資平均數(仟元/人)">全員平均薪資</option>
-                            <option value="員工福利平均數(仟元/人)">員工福利平均</option>
-                        </select>
-                    </div>
-                    <div class="flex gap-4 w-full lg:w-auto">
-                        <div class="flex items-center gap-2 flex-1">
-                            <label class="text-xs font-bold text-slate-500 uppercase">範圍</label>
-                            <select id="filter-scope" onchange="renderLeaderboard()" class="w-full p-2 rounded border border-slate-300 text-sm cursor-pointer">
-                                <option value="industry" selected>同產業 (晶圓製造)</option>
-                                <option value="sector">同類股 (半導體)</option>
-                                <option value="all">全產業</option>
-                            </select>
-                        </div>
-                        <div class="flex items-center gap-2 flex-1">
-                            <label class="text-xs font-bold text-slate-500 uppercase">排序</label>
-                            <select id="filter-order" onchange="renderLeaderboard()" class="w-full p-2 rounded border border-slate-300 text-sm cursor-pointer">
-                                <option value="desc" selected>由高到低</option>
-                                <option value="asc">由低到高</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="overflow-x-auto">
-                    <table class="w-full text-left border-collapse">
-                        <thead class="bg-slate-50 text-xs font-bold text-slate-500 uppercase border-b border-slate-200">
-                            <tr>
-                                <th class="p-4 w-20 text-center">排名</th>
-                                <th class="p-4">公司名稱</th>
-                                <th class="p-4 text-center">細分產業</th>
-                                <th class="p-4 text-right" id="th-metric-name">數值</th>
-                                <th class="p-4 w-32 text-center">狀態</th>
-                            </tr>
-                        </thead>
-                        <tbody id="leaderboard-body" class="text-sm text-slate-700 divide-y divide-slate-100"></tbody>
-                    </table>
+        <section id="esg" class="scroll-mt-24">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                    <span class="bg-emerald-500 w-2 h-8 rounded-full"></span> 工安與環境永續 (ESG)
+                </h3>
+                <div class="relative">
+                    <select id="safety-year-select" onchange="updateSafetyData()" class="bg-white text-slate-700 text-sm font-bold py-2 pl-3 pr-8 rounded-lg border border-slate-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 cursor-pointer shadow-sm hover:bg-slate-50">
+                        <option value="2024">2024 年 (民國113)</option>
+                        <option value="2023">2023 年 (民國112)</option>
+                        <option value="2022">2022 年 (民國111)</option>
+                    </select>
                 </div>
             </div>
+
+            <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-8">
+                <div class="mb-6 pb-4 border-b border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                    <div>
+                        <h4 class="text-lg font-bold text-slate-700">職業災害、火災與環境指標</h4>
+                        <p class="text-slate-400 text-xs mt-1">資料來源：職業災害統計、ESG 永續報告書</p>
+                    </div>
+                    </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <div class="bg-orange-50 p-6 rounded-xl border border-orange-100 flex flex-col items-center justify-center text-center hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xl mb-3">
+                            <i class="fa-solid fa-user-injured"></i>
+                        </div>
+                        <h5 class="text-slate-500 text-xs font-bold mb-1 uppercase">職業災害人數</h5>
+                        <p class="text-3xl font-bold text-slate-800" id="safety-count">-</p>
+                        <p class="text-xs text-slate-400 mt-2">人</p>
+                    </div>
+
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 flex flex-col items-center justify-center text-center hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl mb-3">
+                            <i class="fa-solid fa-percent"></i>
+                        </div>
+                        <h5 class="text-slate-500 text-xs font-bold mb-1 uppercase">職業災害比率</h5>
+                        <p class="text-3xl font-bold text-slate-800" id="safety-rate">-</p>
+                        <p class="text-xs text-slate-400 mt-2">占員工總人數</p>
+                    </div>
+
+                    <div class="bg-red-50 p-6 rounded-xl border border-red-100 flex flex-col items-center justify-center text-center hover:shadow-md transition">
+                        <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mb-3">
+                            <i class="fa-solid fa-fire"></i>
+                        </div>
+                        <h5 class="text-slate-500 text-xs font-bold mb-1 uppercase">火災件數</h5>
+                        <p class="text-3xl font-bold text-slate-800" id="safety-fire">-</p>
+                        <p class="text-xs text-slate-400 mt-2">件</p>
+                    </div>
+
+                    <a href="esg.html" target="_blank" class="group block h-full">
+                        <div class="bg-emerald-600 h-full rounded-xl border border-emerald-600 p-6 flex flex-col items-center justify-center text-center text-white shadow-md hover:bg-emerald-700 hover:shadow-xl hover:scale-[1.02] transition-all cursor-pointer relative overflow-hidden">
+                            <div class="absolute top-0 right-0 p-4 opacity-20"><i class="fa-solid fa-leaf text-5xl"></i></div>
+                            
+                            <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-white text-xl mb-3 group-hover:rotate-12 transition-transform">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                            <h5 class="text-emerald-100 text-xs font-bold mb-1 uppercase tracking-wider">進階數據</h5>
+                            <p class="text-xl font-bold mb-1">環境儀表板</p>
+                            <p class="text-xs text-emerald-200 mt-2 flex items-center gap-1">
+                                查看碳排與綠能 <i class="fa-solid fa-arrow-right"></i>
+                            </p>
+                        </div>
+                    </a>
+
+                </div>
+            </div>
+        </section>
+        <section id="market-rank" class="scroll-mt-24">
+            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
+                <span class="bg-blue-500 w-2 h-8 rounded-full"></span> 同業薪資排名
+            </h3>
+            <a href="leaderboard.html" target="_blank" class="block group">
+                <div class="bg-white border border-blue-100 rounded-xl shadow-lg p-8 relative overflow-hidden transition-transform transform group-hover:scale-[1.01] group-hover:shadow-2xl">
+                    <div class="absolute top-0 right-0 p-8 opacity-5 text-blue-900 group-hover:opacity-10 transition duration-500">
+                        <i class="fa-solid fa-trophy text-9xl"></i>
+                    </div>
+                    
+                    <div class="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-2 py-1 rounded">薪資中位數比較</span>
+                                <h4 class="text-slate-500 font-bold text-sm tracking-wider uppercase">產業排名快報</h4>
+                            </div>
+                            
+                            <div class="flex items-baseline gap-3 mb-4">
+                                <span class="text-3xl font-bold text-slate-700">排名</span>
+                                <span class="text-6xl font-bold text-blue-600 font-mono" id="rank-display">#4</span>
+                                <span class="text-xl text-slate-400" id="rank-total">/ 10 (半導體業)</span>
+                            </div>
+                            <p class="text-slate-600 max-w-lg leading-relaxed text-sm md:text-base">
+                                在 10 家同類股企業中，台積電的薪資中位數表現強勁，名列前茅。想知道誰是第一名？點擊查看完整排行榜。
+                            </p>
+                        </div>
+                        <button class="bg-blue-600 text-white px-6 py-3 rounded-full font-bold hover:bg-blue-700 transition shadow-md flex items-center gap-2 text-sm md:text-base whitespace-nowrap">
+                            查看完整排行榜 <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+            </a>
         </section>
 
     </main>
@@ -312,48 +351,23 @@
     </footer>
 
     <script>
-        // 工安資料 (來自上傳的 CSV 檔案)
-        // 2024 為真實數據 (113年)，2023/2022 為模擬數據以支援篩選功能
+        // 工安數據
         const safetyData = {
             "2024": { count: 37, rate: "0.05%", fire: 0 },
-            "2023": { count: 35, rate: "0.04%", fire: 0 }, // 模擬
-            "2022": { count: 32, rate: "0.04%", fire: 1 }  // 模擬
+            "2023": { count: 35, rate: "0.04%", fire: 0 },
+            "2022": { count: 32, rate: "0.04%", fire: 1 }
         };
 
         function updateSafetyData() {
             const year = document.getElementById('safety-year-select').value;
-            const data = safetyData[year];
-            
-            // 更新 UI
-            if (data) {
-                document.getElementById('safety-count').innerText = data.count;
-                document.getElementById('safety-rate').innerText = data.rate;
-                document.getElementById('safety-fire').innerText = data.fire;
-            } else {
-                // 如果沒有資料的處理
-                document.getElementById('safety-count').innerText = "-";
-                document.getElementById('safety-rate').innerText = "-";
-                document.getElementById('safety-fire').innerText = "-";
-            }
+            const data = safetyData[year] || { count: "-", rate: "-", fire: "-" };
+            document.getElementById('safety-count').innerText = data.count;
+            document.getElementById('safety-rate').innerText = data.rate;
+            document.getElementById('safety-fire').innerText = data.fire;
         }
 
-        // 互動腳本與資料還原
-        const currentCompanyId = 2330; 
-        const rawData = [
-            {"公司代號":2454,"公司名稱":"聯發科","員工福利平均數(仟元/人)":4978,"員工薪資平均數(仟元/人)":4633,"非擔任主管職務之全時員工薪資平均數(仟元/人)":4310,"非擔任主管之全時員工薪資中位數(仟元/人)":3438,"產業別":"IC設計","大類":"半導體"},
-            {"公司代號":2379,"公司名稱":"瑞昱","員工福利平均數(仟元/人)":5056,"員工薪資平均數(仟元/人)":4751,"非擔任主管職務之全時員工薪資平均數(仟元/人)":3915,"非擔任主管之全時員工薪資中位數(仟元/人)":3246,"產業別":"IC設計","大類":"半導體"},
-            {"公司代號":3034,"公司名稱":"聯詠","員工福利平均數(仟元/人)":3889,"員工薪資平均數(仟元/人)":3586,"非擔任主管職務之全時員工薪資平均數(仟元/人)":3521,"非擔任主管之全時員工薪資中位數(仟元/人)":2865,"產業別":"IC設計","大類":"半導體"},
-            {"公司代號":2330,"公司名稱":"台積電","員工福利平均數(仟元/人)":3633,"員工薪資平均數(仟元/人)":3329,"非擔任主管職務之全時員工薪資平均數(仟元/人)":3391,"非擔任主管之全時員工薪資中位數(仟元/人)":2645,"產業別":"晶圓製造","大類":"半導體"},
-            {"公司代號":2303,"公司名稱":"聯電","員工福利平均數(仟元/人)":2265,"員工薪資平均數(仟元/人)":2046,"非擔任主管職務之全時員工薪資平均數(仟元/人)":1800,"非擔任主管之全時員工薪資中位數(仟元/人)":1611,"產業別":"晶圓製造","大類":"半導體"},
-            {"公司代號":3711,"公司名稱":"日月光投控","員工福利平均數(仟元/人)":1950,"員工薪資平均數(仟元/人)":1800,"非擔任主管職務之全時員工薪資平均數(仟元/人)":1750,"非擔任主管之全時員工薪資中位數(仟元/人)":1450,"產業別":"封裝測試","大類":"半導體"},
-            {"公司代號":2603,"公司名稱":"長榮","員工福利平均數(仟元/人)":2909,"員工薪資平均數(仟元/人)":2642,"非擔任主管職務之全時員工薪資平均數(仟元/人)":2523,"非擔任主管之全時員工薪資中位數(仟元/人)":2415,"產業別":"航運","大類":"航運"},
-            {"公司代號":2609,"公司名稱":"陽明","員工福利平均數(仟元/人)":3079,"員工薪資平均數(仟元/人)":2680,"非擔任主管職務之全時員工薪資平均數(仟元/人)":2342,"非擔任主管之全時員工薪資中位數(仟元/人)":2048,"產業別":"航運","大類":"航運"},
-            {"公司代號":2317,"公司名稱":"鴻海","員工福利平均數(仟元/人)":2930,"員工薪資平均數(仟元/人)":2496,"非擔任主管職務之全時員工薪資平均數(仟元/人)":2670,"非擔任主管之全時員工薪資中位數(仟元/人)":1937,"產業別":"組裝代工","大類":"電子零組件"},
-            {"公司代號":2881,"公司名稱":"富邦金","員工福利平均數(仟元/人)":1604,"員工薪資平均數(仟元/人)":1347,"非擔任主管職務之全時員工薪資平均數(仟元/人)":1624,"非擔任主管之全時員工薪資中位數(仟元/人)":1293,"產業別":"金控","大類":"金融"},
-        ];
-
+        // 薪資互動
         const companyMedian = 256.3; 
-
         function updateSalaryPosition() {
             const inputVal = parseFloat(document.getElementById('user-salary-input').value) || 0;
             const bar = document.getElementById('user-bar');
@@ -375,69 +389,36 @@
             }
         }
 
-        function renderLeaderboard() {
-            const metricKey = document.getElementById('filter-metric').value;
-            const scope = document.getElementById('filter-scope').value;
-            const order = document.getElementById('filter-order').value;
-            const currentCompany = rawData.find(c => c['公司代號'] === currentCompanyId);
+        // 簡易排名計算
+        const rawData = [
+            {"公司代號":2454,"非擔任主管之全時員工薪資中位數(仟元/人)":3438,"大類":"半導體"},
+            {"公司代號":2379,"非擔任主管之全時員工薪資中位數(仟元/人)":3246,"大類":"半導體"},
+            {"公司代號":3034,"非擔任主管之全時員工薪資中位數(仟元/人)":2865,"大類":"半導體"},
+            {"公司代號":2330,"非擔任主管之全時員工薪資中位數(仟元/人)":2645,"大類":"半導體"},
+            {"公司代號":2303,"非擔任主管之全時員工薪資中位數(仟元/人)":1611,"大類":"半導體"},
+            {"公司代號":3711,"非擔任主管之全時員工薪資中位數(仟元/人)":1450,"大類":"半導體"},
+            {"公司代號":2603,"非擔任主管之全時員工薪資中位數(仟元/人)":2415,"大類":"航運"},
+            {"公司代號":2609,"非擔任主管之全時員工薪資中位數(仟元/人)":2048,"大類":"航運"},
+            {"公司代號":2317,"非擔任主管之全時員工薪資中位數(仟元/人)":1937,"大類":"電子零組件"},
+            {"公司代號":2881,"非擔任主管之全時員工薪資中位數(仟元/人)":1293,"大類":"金融"},
+        ];
+        
+        function initRankCard() {
+            const targetId = 2330;
+            const sectorData = rawData.filter(d => d['大類'] === '半導體');
+            sectorData.sort((a, b) => b['非擔任主管之全時員工薪資中位數(仟元/人)'] - a['非擔任主管之全時員工薪資中位數(仟元/人)']);
             
-            // 篩選邏輯
-            let filteredData = [...rawData];
-            let scopeText = "全產業";
-            if (scope === 'industry') {
-                filteredData = rawData.filter(item => item['產業別'] === currentCompany['產業別']);
-                scopeText = "同產業 (晶圓製造)";
-            } else if (scope === 'sector') {
-                filteredData = rawData.filter(item => item['大類'] === currentCompany['大類']);
-                scopeText = "同類股 (半導體)";
-            }
-
-            // 排序邏輯
-            filteredData.sort((a, b) => order === 'desc' ? b[metricKey] - a[metricKey] : a[metricKey] - b[metricKey]);
-
-            // 對應欄位名稱
-            const metricNameMap = {
-                '非擔任主管之全時員工薪資中位數(仟元/人)': '薪資中位數 (仟元)',
-                '非擔任主管職務之全時員工薪資平均數(仟元/人)': '非主管平均 (仟元)',
-                '員工薪資平均數(仟元/人)': '全員平均薪資 (仟元)',
-                '員工福利平均數(仟元/人)': '員工福利平均 (仟元)'
-            };
-
-            document.getElementById('th-metric-name').innerText = metricNameMap[metricKey];
-            document.getElementById('lb-title-dynamic').innerText = `台積電 vs ${scopeText}`;
-
-            const tbody = document.getElementById('leaderboard-body');
-            tbody.innerHTML = filteredData.map((item, index) => {
-                const isCurrent = item['公司代號'] === currentCompanyId;
-                const rankColor = index < 3 ? "bg-yellow-400 text-white" : "bg-slate-200 text-slate-500";
-                
-                return `
-                    <tr class="${isCurrent ? 'bg-emerald-50 border-l-4 border-l-emerald-500 font-bold' : 'hover:bg-slate-50'} table-row-anim border-b border-slate-100">
-                        <td class="p-4 text-center">
-                            <div class="w-8 h-8 rounded-full flex items-center justify-center mx-auto text-sm font-bold shadow-sm ${rankColor}">${index + 1}</div>
-                        </td>
-                        <td class="p-4">
-                            <div class="${isCurrent ? 'text-emerald-900' : 'text-slate-800'}">${item['公司名稱']} (${item['公司代號']})</div>
-                        </td>
-                        <td class="p-4 text-center text-slate-500 text-xs">
-                            <span class="bg-slate-100 px-2 py-1 rounded">${item['產業別']}</span>
-                        </td>
-                        <td class="p-4 text-right font-mono text-base ${isCurrent ? 'text-emerald-600' : 'text-slate-600'}">
-                            ${item[metricKey].toLocaleString()}
-                        </td>
-                        <td class="p-4 text-center">
-                            ${isCurrent ? '<span class="text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full">Viewing</span>' : ''}
-                        </td>
-                    </tr>
-                `;
-            }).join('');
+            const rank = sectorData.findIndex(d => d['公司代號'] === targetId) + 1;
+            const total = sectorData.length;
+            
+            document.getElementById('rank-display').innerText = `#${rank}`;
+            document.getElementById('rank-total').innerText = `/ ${total} (半導體同類股)`;
         }
 
-        // 初始化
         window.onload = () => {
             updateSalaryPosition();
-            renderLeaderboard();
-            updateSafetyData(); // 初始化工安數據
+            updateSafetyData();
+            initRankCard();
         };
     </script>
 </body>
