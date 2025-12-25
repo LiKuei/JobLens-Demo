@@ -25,8 +25,8 @@
                 <span class="text-xl font-bold tracking-wider">JobLens</span>
             </div>
             <div class="hidden md:flex gap-6 text-sm font-medium">
-                <a href="search.html#salary" class="hover:text-emerald-400 transition">企業資訊</a>
                 <a href="supply-chain.html" class="hover:text-emerald-400 transition">產業鏈</a>
+                <a href="search.html#salary" class="hover:text-emerald-400 transition">薪資透視</a>
                 <a href="#" class="text-emerald-400 font-bold border-b-2 border-emerald-400 transition">評論</a>
             </div>
         </div>
@@ -41,10 +41,8 @@
     </header>
 
     <main class="container mx-auto px-4 py-8 space-y-12">
-        <section class="h-[800px]"> <!-- Set a fixed height for alignment -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-stretch">
+        <section class="h-[800px]"> <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 h-full items-stretch">
                 
-                <!-- Left: Word Cloud (Span 7) -->
                 <div class="lg:col-span-7 bg-white rounded-xl shadow-lg border border-slate-100 p-6 flex flex-col h-full">
                     <div class="flex justify-between items-center mb-4 flex-shrink-0">
                         <h4 class="text-lg font-bold text-slate-700">
@@ -52,6 +50,7 @@
                         </h4>
                         <div class="flex gap-2 text-xs">
                             <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-emerald-500"></div> 正面</span>
+                            <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-slate-400"></div> 中立</span>
                             <span class="flex items-center gap-1"><div class="w-3 h-3 rounded-full bg-red-500"></div> 負面</span>
                         </div>
                     </div>
@@ -61,16 +60,13 @@
                         <p>薪資與分紅競爭力極高，但工作強度大、工時長是主要痛點。新人訓練扎實，被視為練功的好地方。</p>
                     </div>
 
-                    <!-- Canvas Container takes remaining height -->
                     <div class="w-full bg-slate-50 rounded-xl border border-slate-200 relative p-4 flex items-center justify-center overflow-hidden flex-1">
                         <canvas id="word-cloud-canvas" class="w-full h-full"></canvas>
                     </div>
                 </div>
 
-                <!-- Right: Split Column (Span 5) -->
                 <div class="lg:col-span-5 flex flex-col gap-6 h-full">
                     
-                    <!-- Top Half: Comments (50% Height) -->
                     <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 flex flex-col h-[50%]">
                         <h4 class="text-lg font-bold text-slate-700 mb-4 flex items-center justify-between flex-shrink-0">
                             <span><i class="fa-solid fa-comments text-blue-500 mr-2"></i> 真實評論摘錄</span>
@@ -84,7 +80,6 @@
                                 <span class="bg-slate-800 text-white text-xs font-bold px-2 py-0.5 rounded">PTT</span>
                                 <p class="text-slate-700 mt-2">部門風氣還不錯，主管願意教人。這裡算是練功的好地方。</p>
                             </div>
-                            <!-- More placeholder comments to test scroll -->
                             <div class="p-3 bg-slate-50 rounded-lg border border-slate-200 text-sm">
                                 <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-0.5 rounded">Dcard</span>
                                 <p class="text-slate-700 mt-2">南科廠區很大，生活機能還在發展中，要有交通工具比較方便。</p>
@@ -92,7 +87,6 @@
                         </div>
                     </div>
 
-                    <!-- Bottom Half: News (50% Height) -->
                     <div class="bg-white rounded-xl shadow-lg border border-slate-100 p-6 flex flex-col h-[50%]">
                         <h4 class="text-lg font-bold text-slate-700 mb-4 flex items-center justify-between flex-shrink-0">
                             <span><i class="fa-solid fa-newspaper text-emerald-500 mr-2"></i> 企業相關新聞</span>
@@ -144,6 +138,7 @@
     </footer>
 
     <script>
+        // 修改 2: 加入中立情緒 (sentiment: 0) 的關鍵字
         const rawWordsData = [
             { text: "分紅大方", size: 60, sentiment: 0.9 },
             { text: "常態加班", size: 55, sentiment: -0.8 },
@@ -152,7 +147,10 @@
             { text: "學到很多", size: 38, sentiment: 0.6 },
             { text: "輪班星人", size: 35, sentiment: -0.5 },
             { text: "福利佳", size: 28, sentiment: 0.8 },
-            { text: "午餐好吃", size: 22, sentiment: 0.3 }
+            { text: "午餐好吃", size: 22, sentiment: 0.3 },
+            { text: "南科", size: 30, sentiment: 0 },
+            { text: "制度完整", size: 26, sentiment: 0 },
+            { text: "生活機能", size: 20, sentiment: 0 }
         ];
 
         function renderWordCloud() {
@@ -166,7 +164,10 @@
                 fontFamily: "'Noto Sans TC', sans-serif",
                 color: (word) => {
                     const d = rawWordsData.find(w => w.text === word);
-                    return d.sentiment > 0 ? '#10b981' : '#ef4444';
+                    // 修改 3: 增加中立顏色邏輯 (灰色)
+                    if (d.sentiment > 0.1) return '#10b981'; // 正面 (綠)
+                    if (d.sentiment < -0.1) return '#ef4444'; // 負面 (紅)
+                    return '#94a3b8'; // 中立 (灰, Slate-400)
                 },
                 rotateRatio: 0,
                 shape: 'circle',
