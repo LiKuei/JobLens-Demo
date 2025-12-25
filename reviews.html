@@ -138,7 +138,6 @@
     </footer>
 
     <script>
-        // 修改 2: 加入中立情緒 (sentiment: 0) 的關鍵字
         const rawWordsData = [
             { text: "分紅大方", size: 60, sentiment: 0.9 },
             { text: "常態加班", size: 55, sentiment: -0.8 },
@@ -157,6 +156,12 @@
             const canvas = document.getElementById('word-cloud-canvas');
             canvas.width = canvas.offsetWidth;
             canvas.height = canvas.offsetHeight;
+            
+            // 計算最大與最小字頻，用於計算顏色梯度
+            const sizes = rawWordsData.map(item => item.size);
+            const maxSize = Math.max(...sizes);
+            const minSize = Math.min(...sizes);
+
             WordCloud(canvas, {
                 list: rawWordsData.map(item => [item.text, item.size]),
                 gridSize: 8,
@@ -164,10 +169,38 @@
                 fontFamily: "'Noto Sans TC', sans-serif",
                 color: (word) => {
                     const d = rawWordsData.find(w => w.text === word);
-                    // 修改 3: 增加中立顏色邏輯 (灰色)
-                    if (d.sentiment > 0.1) return '#10b981'; // 正面 (綠)
-                    if (d.sentiment < -0.1) return '#ef4444'; // 負面 (紅)
-                    return '#94a3b8'; // 中立 (灰, Slate-400)
+                    
+                    // 計算該字詞的大小比例 (0 ~ 1)
+                    // 如果最大最小相等(防呆)，ratio 設為 1
+                    let ratio = 1;
+                    if (maxSize !== minSize) {
+                        ratio = (d.size - minSize) / (maxSize - minSize);
+                    }
+                    
+                    // 根據情緒決定基底色調 (Hue)，再根據大小調整飽和度(S)與亮度(L)
+                    // 大字: 飽和度高(鮮豔)、亮度適中(清晰)
+                    // 小字: 飽和度低(淡)、亮度較高(粉嫩/淺色)
+                    
+                    let h, s, l;
+
+                    if (d.sentiment > 0.1) {
+                        // 正面 (綠色系, Emerald: Hue ~155)
+                        h = 155; 
+                        s = 40 + (ratio * 50); // S: 40% ~ 90%
+                        l = 65 - (ratio * 25); // L: 65% ~ 40%
+                    } else if (d.sentiment < -0.1) {
+                        // 負面 (紅色系, Red: Hue ~350)
+                        h = 350;
+                        s = 50 + (ratio * 40); // S: 50% ~ 90%
+                        l = 70 - (ratio * 25); // L: 70% ~ 45%
+                    } else {
+                        // 中立 (灰色系, Slate: Hue ~215)
+                        h = 215;
+                        s = 5 + (ratio * 15);  // S: 5% ~ 20% (維持低飽和)
+                        l = 75 - (ratio * 35); // L: 75% ~ 40% (大字要夠黑才看得清楚)
+                    }
+
+                    return `hsl(${h}, ${s}%, ${l}%)`;
                 },
                 rotateRatio: 0,
                 shape: 'circle',
