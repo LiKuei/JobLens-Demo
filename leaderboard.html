@@ -17,13 +17,15 @@
 
     <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.close()">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 text-2xl"></i>
-                <span class="text-xl font-bold tracking-wider">JobLens <span class="text-sm font-normal text-slate-400">| 排行榜</span></span>
+                <span class="text-xl font-bold tracking-wider">JobLens</span>
             </div>
-            <button onclick="window.close()" class="text-sm bg-slate-800 hover:bg-slate-700 px-4 py-2 rounded transition">
-                <i class="fa-solid fa-xmark mr-1"></i> 關閉頁面
-            </button>
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="search.html" class="hover:text-emerald-400 transition">企業資訊</a>
+                <a href="supply-chain.html" class="hover:text-emerald-400 transition">產業鏈</a>
+                <a href="reviews.html" class="hover:text-emerald-400 transition">評論</a>
+            </div>
         </div>
     </nav>
 
