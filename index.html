@@ -21,7 +21,12 @@
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
                 <i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-2xl"></i>
-                <span class="text-xl font-bold tracking-wider">JobLens <span class="text-xs font-normal text-slate-400">beta</span></span>
+                <span class="text-xl font-bold tracking-wider">JobLens</span>
+            </div>
+            <div class="hidden md:flex gap-6 text-sm font-medium">
+                <a href="about.html" class="border border-cyan-500 text-cyan-400 px-5 py-2 rounded-full font-bold hover:bg-cyan-500 hover:text-white transition-all">
+                    關於我們
+                </a>
             </div>
         </div>
     </nav>
@@ -37,7 +42,7 @@
                        class="w-full p-4 pl-6 rounded-full text-slate-900 shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-600/50 transition text-lg">
                 
                 <button onclick="window.location.href='search.html'" 
-                        class="absolute right-2 top-2 bg-cyan-600 hover:bg-emerald-600 text-white px-8 py-2.5 rounded-full transition font-bold text-lg shadow-lg">
+                        class="absolute right-2 top-2 bg-cyan-600 hover:bg-cyan-700 text-white px-8 py-2.5 rounded-full transition font-bold text-lg shadow-lg">
                     透視
                 </button>
 
@@ -174,8 +179,8 @@
                 <div class="p-3 hover:bg-slate-50 cursor-pointer border-b border-slate-50 last:border-0 transition flex justify-between items-center group" 
                      onclick="selectCompany('${item.code}', '${item.fullName}')">
                     <div>
-                        <span class="font-mono font-bold text-emerald-600 mr-2 bg-emerald-50 px-2 py-0.5 rounded text-sm">${item.code}</span>
-                        <span class="font-bold text-slate-700 group-hover:text-emerald-700">${item.fullName}</span>
+                        <span class="font-mono font-bold text-cyan-700 mr-2 bg-cyan-50 px-2 py-0.5 rounded text-sm">${item.code}</span>
+                        <span class="font-bold text-slate-700 group-hover:text-cyan-800">${item.fullName}</span>
                         <span class="text-xs text-slate-400 ml-1">(${item.name})</span>
                     </div>
                     <span class="text-xs text-slate-400 border border-slate-200 px-2 py-0.5 rounded-full group-hover:border-emerald-200 group-hover:text-cyan-600">${item.industry}</span>
