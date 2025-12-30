@@ -18,13 +18,13 @@
     <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 text-2xl"></i>
+                <i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-2xl"></i>
                 <span class="text-xl font-bold tracking-wider">JobLens</span>
             </div>
             <div class="hidden md:flex gap-6 text-sm font-medium">
-                <a href="search.html" class="hover:text-emerald-400 transition">企業資訊</a>
-                <a href="supply-chain.html" class="hover:text-emerald-400 transition">產業鏈</a>
-                <a href="reviews.html" class="hover:text-emerald-400 transition">評論</a>
+                <a href="search.html" class="hover:text-cyan-400 transition">企業資訊</a>
+                <a href="supply-chain.html" class="hover:text-cyan-400 transition">產業鏈</a>
+                <a href="reviews.html" class="hover:text-cyan-400 transition">評論</a>
             </div>
         </div>
     </nav>
@@ -133,7 +133,7 @@
                 const rankColor = index < 3 ? "bg-yellow-400 text-white" : "bg-slate-200 text-slate-500";
                 
                 return `
-                    <tr class="${isCurrent ? 'bg-emerald-50 border-l-4 border-l-emerald-500 font-bold' : 'hover:bg-slate-50'} table-row-anim border-b border-slate-100">
+                    <tr class="${isCurrent ? 'bg-cyan-50 border-l-4 border-l-cyan-600 font-bold' : 'hover:bg-slate-50'} table-row-anim border-b border-slate-100">
                         <td class="p-4 text-center">
                             <div class="w-8 h-8 rounded-full flex items-center justify-center mx-auto text-sm font-bold shadow-sm ${rankColor}">${index + 1}</div>
                         </td>
@@ -143,11 +143,11 @@
                         <td class="p-4 text-center text-slate-500 text-xs">
                             <span class="bg-slate-100 px-2 py-1 rounded">${item['產業別']}</span>
                         </td>
-                        <td class="p-4 text-right font-mono text-base ${isCurrent ? 'text-emerald-600' : 'text-slate-600'}">
+                        <td class="p-4 text-right font-mono text-base ${isCurrent ? 'text-cyan-700' : 'text-slate-600'}">
                             ${item[metricKey].toLocaleString()}
                         </td>
                         <td class="p-4 text-center">
-                            ${isCurrent ? '<span class="text-xs font-bold text-emerald-600 bg-emerald-100 px-2 py-1 rounded-full">Viewing</span>' : ''}
+                            ${isCurrent ? '<span class="text-xs font-bold text-cyan-700 bg-emerald-100 px-2 py-1 rounded-full">Viewing</span>' : ''}
                         </td>
                     </tr>
                 `;

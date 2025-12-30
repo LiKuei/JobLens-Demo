@@ -11,7 +11,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
         body { font-family: 'Noto Sans TC', sans-serif; }
         .chart-container { position: relative; height: 300px; width: 100%; }
-        /* 隱藏捲軸但保持功能 (選用) */
+        /* 隱藏捲軸但保持功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
@@ -23,10 +23,9 @@
             <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-2xl"></i>
                 <span class="text-xl font-bold tracking-wider">
-                    JobLens
+                    JobLens <span class="text-xs font-normal text-slate-400">beta</span>
                 </span>
             </div>
-            
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
                 <a href="supply-chain.html" class="hover:text-cyan-400 transition">產業鏈</a>
                 <a href="reviews.html" class="hover:text-cyan-400 transition">評論</a>
@@ -46,190 +45,220 @@
 
     <main class="container mx-auto px-4 py-8 space-y-12">
         <section id="supply-chain-overview" class="scroll-mt-24">
-            <h3 class="text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <span class="bg-blue-500 w-2 h-8 rounded-full"></span> 供應鏈結構
+            <h3 class="text-2xl font-bold text-slate-800 mb-8 flex items-center gap-2">
+                <span class="bg-cyan-500 w-2 h-8 rounded-full"></span> 供應鏈結構圖
             </h3>
-            <div class="bg-white rounded-xl shadow-lg p-6 border border-slate-100">
-                <div id="main_ic_panel" class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="chain flex flex-col items-center">
-                        <div class="chain-title-panel text-lg font-bold text-slate-700 mb-4">上游</div>
-                        <div class="chain-company flex items-center justify-center space-x-2 mb-4">
-                            <div id="ic_link_DC00" class="company-chain-panel bg-emerald-100 text-emerald-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-emerald-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_DC00')">IP設計<br>/IC設計<br>代工服務</div>
-                            <i class="fa-solid fa-arrow-right text-slate-500"></i>
-                            <div id="ic_link_D100" class="company-chain-panel bg-blue-100 text-blue-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-blue-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D100')">IC設計</div>
-                        </div>
-                    </div>
-                    <div class="chain flex flex-col items-center">
-                        <div class="chain-title-panel text-lg font-bold text-slate-700 mb-4">中游</div>
-                        <div class="chain-company flex flex-col items-center mb-4">
-                            <div id="ic_link_D300" class="company-chain-panel bg-purple-100 text-purple-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-purple-200 transition-colors duration-200 w-full mb-2" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D300')">IC/晶圓製造</div>
-                            <i class="fa-solid fa-arrow-down text-slate-500 mb-2"></i>
-                            <div class="chain-group flex justify-center space-x-2">
-                                <div id="ic_link_D400" class="company-chain-panel bg-yellow-100 text-yellow-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-yellow-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D400')">生產製程<br>及<br>檢測設備</div>
-                                <div id="ic_link_D200" class="company-chain-panel bg-yellow-100 text-yellow-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-yellow-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D200')">光罩</div>
-                                <div id="ic_link_D500" class="company-chain-panel bg-yellow-100 text-yellow-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-yellow-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D500')">化學品</div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="chain flex flex-col items-center">
-                        <div class="chain-title-panel text-lg font-bold text-slate-700 mb-4">下游</div>
-                        <div class="chain-company flex flex-col items-center mb-4">
-                            <div id="ic_link_D900" class="company-chain-panel bg-red-100 text-red-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-red-200 transition-colors duration-200 w-full mb-2" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D900')">IC封裝測試</div>
-                            <i class="fa-solid fa-arrow-down text-slate-500 mb-2"></i>
-                            <div class="chain-group flex justify-center space-x-2 mb-4">
-                                <div id="ic_link_D600" class="company-chain-panel bg-orange-100 text-orange-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-orange-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D600')">生產製程<br>及<br>檢測設備</div>
-                                <div id="ic_link_D700" class="company-chain-panel bg-orange-100 text-orange-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-orange-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D700')">基板</div>
-                                <div id="ic_link_D800" class="company-chain-panel bg-orange-100 text-orange-800 px-4 py-6 rounded-lg text-center font-semibold cursor-pointer hover:bg-orange-200 transition-colors duration-200" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_D800')">導線架</div>
-                            </div>
-                            <i class="fa-solid fa-arrow-right text-slate-500 mb-2"></i>
-                            <div class="flex flex-col items-center space-y-2">
-                                <div id="ic_link_DA00" class="company-chain-panel bg-green-100 text-green-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-green-200 transition-colors duration-200 w-full" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_DA00')">IC模組</div>
-                                <div id="ic_link_DB00" class="company-chain-panel bg-green-100 text-green-800 px-4 py-2 rounded-lg text-center font-semibold cursor-pointer hover:bg-green-200 transition-colors duration-200 w-full" title="點擊以查詢此產業下的公司清單" onclick="toggleCompanyList('companyList_DB00')">IC通路</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="bg-white rounded-2xl shadow-xl border border-slate-100 p-8 pb-12 overflow-visible relative">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 rounded-t-2xl"></div>
                 
-                <div id="company-lists" class="mt-12 space-y-6">
-                    <h4 class="text-xl font-bold text-slate-700">產業公司列表</h4>
-                    <div id="companyList_DC00" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">IP設計/IC設計代工服務 <span class="text-sm font-normal text-slate-500">(共22家)</span></p>
-                        <div class="company-details pt-4">
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國上市公司 (7家)</h5>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <a href="company_basic.php?stk_code=2401" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">凌陽</a>
-                                <a href="company_basic.php?stk_code=3035" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">智原</a>
-                                <a href="company_basic.php?stk_code=3443" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">創意</a>
-                                <a href="company_basic.php?stk_code=5222" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">全訊</a>
-                                <a href="company_basic.php?stk_code=6423" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">億而得-創</a>
-                                <a href="company_basic.php?stk_code=6533" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">晶心科</a>
-                                <a href="company_basic.php?stk_code=6695" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">芯鼎</a>
-                            </div>
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">外國上市公司 (1家)</h5>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <a href="company_basic.php?stk_code=3661" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">世芯-KY</a>
-                            </div>
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國上櫃公司 (6家)</h5>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <a href="company_basic.php?stk_code=3339" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">泰谷</a>
-                                <a href="company_basic.php?stk_code=3529" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">力旺</a>
-                                <a href="company_basic.php?stk_code=6643" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">M31</a>
-                                <a href="company_basic.php?stk_code=8054" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">安國</a>
-                                <a href="company_basic.php?stk_code=8227" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">巨有科技</a>
-                                <a href="company_basic.php?stk_code=8299" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">群聯</a>
-                            </div>
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國興櫃公司 (4家)</h5>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <a href="company_basic.php?stk_code=6786" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">芯測</a>
-                                <a href="company_basic.php?stk_code=6842" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">一元素</a>
-                                <a href="company_basic.php?stk_code=7707" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">益芯科</a>
-                                <a href="company_basic.php?stk_code=7796" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">擷發科</a>
-                            </div>
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">知名外國企業 (4家)</h5>
-                            <div class="flex flex-wrap gap-2">
-                                <a href="http://www.arm.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">安謀</a>
-                                <a href="http://www.cadence.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">益華</a>
-                                <a href="http://imgtec.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">Imagination</a>
-                                <a href="http://www.synopsys.com/home.aspx" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">新思科技</a>
-                            </div>
-                        </div>
-                    </div>
+                <div id="main_ic_panel" class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative mb-12">
                     
-                    <div id="companyList_D100" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">IC設計 <span class="text-sm font-normal text-slate-500">(共211家)</span></p>
-                        <div class="company-details pt-4"><h5 class="text-md font-semibold text-slate-600 mb-2">IC設計... (請使用原始檔案內容)</h5></div>
-                    </div>
-                    <div id="companyList_D200" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">光罩 <span class="text-sm font-normal text-slate-500">(共5家)</span></p>
-                        <div class="company-details pt-4">
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">本國上市公司 (2家)</h5>
-                            <div class="flex flex-wrap gap-2 mb-4">
-                                <a href="company_basic.php?stk_code=2338" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">光罩</a>
-                                <a href="company_basic.php?stk_code=2438" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">翔耀</a>
-                            </div>
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">知名外國企業 (3家)</h5>
-                            <div class="flex flex-wrap gap-2">
-                                <a href="https://www.dnp.co.jp/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">大日本印刷</a>
-                                <a href="http://www.photronics.com/plab/photronics/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">豐創</a>
-                                <a href="http://www.toppan.co.jp/english/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">凸版印刷</a>
+                    <div class="chain-col relative group flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-8 h-8 rounded-full bg-cyan-100 text-cyan-600 flex items-center justify-center font-bold shadow-sm">1</div>
+                            <h4 class="text-xl font-bold text-slate-700">上游 <span class="text-sm text-slate-400 font-normal">設計與研發</span></h4>
+                        </div>
+                        
+                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 h-full relative shadow-sm hover:shadow-md transition-shadow flex flex-col justify-center">
+                            <div class="hidden lg:block absolute top-1/2 left-full w-12 h-1 bg-slate-300 z-0"></div>
+                            <div class="hidden lg:block absolute top-1/2 -right-12 w-3 h-3 bg-slate-300 rounded-full transform translate-x-1/2 -translate-y-1/2 z-10 border-2 border-white"></div>
+
+                            <div class="flex flex-col gap-8 relative z-10">
+                                <div id="ic_link_DC00" onclick="toggleCompanyList('companyList_DC00')" 
+                                     class="cursor-pointer bg-white border-2 border-cyan-100 hover:border-cyan-400 rounded-lg p-5 shadow-sm hover:shadow-md transition-all text-center group-node hover:-translate-y-1">
+                                    <div class="text-cyan-600 mb-2"><i class="fa-solid fa-pen-ruler text-2xl"></i></div>
+                                    <h5 class="font-bold text-slate-700 group-node-hover:text-cyan-600">IP / IC 設計代工</h5>
+                                    <p class="text-xs text-slate-400 mt-1">智慧財產權核心</p>
+                                </div>
+
+                                <div class="flex justify-center -my-4 z-0">
+                                    <i class="fa-solid fa-arrow-down text-slate-300"></i>
+                                </div>
+
+                                <div id="ic_link_D100" onclick="toggleCompanyList('companyList_D100')" 
+                                     class="cursor-pointer bg-gradient-to-br from-cyan-500 to-cyan-600 text-white rounded-lg p-6 shadow-lg shadow-cyan-200 hover:shadow-xl hover:scale-105 transition-all text-center ring-4 ring-white">
+                                    <div class="mb-2"><i class="fa-solid fa-microchip text-3xl"></i></div>
+                                    <h5 class="font-bold text-xl">IC 設計</h5>
+                                    <p class="text-xs text-cyan-100 mt-1">邏輯與電路設計</p>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="companyList_D300" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">IC/晶圓製造 <span class="text-sm font-normal text-slate-500">(共50家)</span></p>
-                        <div class="company-details pt-4">
-                            <h5 class="text-md font-semibold text-slate-600 mb-2">IC/晶圓製造</h5>
-                            <div class="space-y-4">
-                                <div class="sub-section">
-                                    <h6 class="text-sm font-semibold text-slate-500 mb-2">晶圓製造</h6>
-                                    <p class="text-xs font-semibold text-slate-500 mb-1">本國上市公司(15家)</p>
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        <a href="company_basic.php?stk_code=2303" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">聯電</a>
-                                        <a href="search.html" class="bg-cyan-100 hover:bg-cyan-200 text-cyan-800 text-sm px-3 py-1 rounded-full transition-colors duration-150 font-bold border border-cyan-300">台積電</a>
-                                        <a href="company_basic.php?stk_code=2337" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">旺宏</a>
-                                        <a href="company_basic.php?stk_code=2340" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">台亞</a>
-                                        <a href="company_basic.php?stk_code=2344" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">華邦電</a>
-                                        <a href="company_basic.php?stk_code=2371" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">大同</a>
-                                        <a href="company_basic.php?stk_code=2408" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">南亞科</a>
-                                        <a href="company_basic.php?stk_code=2434" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">統懋</a>
-                                        <a href="company_basic.php?stk_code=2455" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">全新</a>
-                                        <a href="company_basic.php?stk_code=3016" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">嘉晶</a>
-                                        <a href="company_basic.php?stk_code=3532" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">台勝科</a>
-                                        <a href="company_basic.php?stk_code=4919" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">新唐</a>
-                                        <a href="company_basic.php?stk_code=5222" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">全訊</a>
-                                        <a href="company_basic.php?stk_code=6770" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">力積電</a>
-                                        <a href="company_basic.php?stk_code=8028" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">昇陽半導體</a>
+                    <div class="chain-col relative flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-8 h-8 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center font-bold shadow-sm">2</div>
+                            <h4 class="text-xl font-bold text-slate-700">中游 <span class="text-sm text-slate-400 font-normal">製造與長晶</span></h4>
+                        </div>
+
+                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 h-full relative shadow-sm hover:shadow-md transition-shadow">
+                            <div class="hidden lg:block absolute top-1/2 left-full w-12 h-1 bg-slate-300 z-0"></div>
+                            <div class="hidden lg:block absolute top-1/2 -right-12 w-3 h-3 bg-slate-300 rounded-full transform translate-x-1/2 -translate-y-1/2 z-10 border-2 border-white"></div>
+
+                            <div class="flex flex-col gap-6 h-full relative z-10">
+                                <div id="ic_link_D300" onclick="toggleCompanyList('companyList_D300')" 
+                                     class="cursor-pointer bg-gradient-to-br from-blue-500 to-blue-600 text-white rounded-lg p-6 shadow-lg shadow-blue-200 hover:shadow-xl hover:scale-105 transition-all text-center ring-4 ring-white mb-2">
+                                    <div class="mb-2"><i class="fa-solid fa-industry text-3xl"></i></div>
+                                    <h5 class="font-bold text-xl">IC / 晶圓製造</h5>
+                                    <p class="text-xs text-blue-100 mt-1">晶圓代工與生產</p>
+                                </div>
+
+                                <div class="border-t-2 border-dashed border-slate-300 relative mx-4 my-2">
+                                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-slate-50 px-2 text-xs text-slate-400 font-bold">支援體系</span>
+                                </div>
+
+                                <div class="flex flex-col gap-3 flex-grow">
+                                    <div id="ic_link_D400" onclick="toggleCompanyList('companyList_D400')" class="cursor-pointer bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50 rounded-lg p-3 transition-all flex items-center gap-4 hover:-translate-x-1 shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-robot"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="font-bold text-slate-700 text-sm leading-tight">生產製程及<br>檢測設備</h6>
+                                        </div>
                                     </div>
-                                    <p class="text-xs font-semibold text-slate-500 mb-1">本國上櫃公司(7家)</p>
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        <a href="company_basic.php?stk_code=3105" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">穩懋</a>
-                                        <a href="company_basic.php?stk_code=3707" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">漢磊</a>
-                                        <a href="company_basic.php?stk_code=5347" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">世界</a>
-                                        <a href="company_basic.php?stk_code=5483" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">中美晶</a>
-                                        <a href="company_basic.php?stk_code=6182" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">合晶</a>
-                                        <a href="company_basic.php?stk_code=6488" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">環球晶</a>
-                                        <a href="company_basic.php?stk_code=8086" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">宏捷科</a>
+
+                                    <div id="ic_link_D200" onclick="toggleCompanyList('companyList_D200')" class="cursor-pointer bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50 rounded-lg p-3 transition-all flex items-center gap-4 hover:-translate-x-1 shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-layer-group"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="font-bold text-slate-700 text-sm">光罩</h6>
+                                        </div>
                                     </div>
-                                    <p class="text-xs font-semibold text-slate-500 mb-1">外國上櫃公司(1家)</p>
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        <a href="company_basic.php?stk_code=4991" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150">環宇-KY</a>
-                                    </div>
-                                    <p class="text-xs font-semibold text-slate-500 mb-1">知名外國企業(3家)</p>
-                                    <div class="flex flex-wrap gap-2 mb-2">
-                                        <a href="https://gf.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">格羅方德</a>
-                                        <a href="http://www.samsung.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">三星電子</a>
-                                        <a href="http://www.smics.com/" class="bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm px-3 py-1 rounded-full transition-colors duration-150" target="_blank">中芯國際</a>
+
+                                    <div id="ic_link_D500" onclick="toggleCompanyList('companyList_D500')" class="cursor-pointer bg-white border border-slate-200 hover:border-blue-400 hover:bg-blue-50 rounded-lg p-3 transition-all flex items-center gap-4 hover:-translate-x-1 shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-flask"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="font-bold text-slate-700 text-sm">化學品</h6>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div id="companyList_D400" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">生產製程及檢測設備...</p>
+                    <div class="chain-col flex flex-col h-full">
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-8 h-8 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center font-bold shadow-sm">3</div>
+                            <h4 class="text-xl font-bold text-slate-700">下游 <span class="text-sm text-slate-400 font-normal">封測與銷售</span></h4>
                         </div>
-                    <div id="companyList_D500" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">化學品...</p>
+
+                        <div class="bg-slate-50 rounded-xl p-6 border border-slate-200 h-full shadow-sm hover:shadow-md transition-shadow">
+                            <div class="flex flex-col gap-6 h-full relative z-10">
+                                <div id="ic_link_D900" onclick="toggleCompanyList('companyList_D900')" 
+                                     class="cursor-pointer bg-gradient-to-br from-purple-500 to-purple-600 text-white rounded-lg p-6 shadow-lg shadow-purple-200 hover:shadow-xl hover:scale-105 transition-all text-center ring-4 ring-white mb-2">
+                                    <div class="mb-2"><i class="fa-solid fa-box-open text-3xl"></i></div>
+                                    <h5 class="font-bold text-xl">IC 封裝測試</h5>
+                                    <p class="text-xs text-purple-100 mt-1">後段製程與檢測</p>
+                                </div>
+
+                                <div class="border-t-2 border-dashed border-slate-300 relative mx-4 my-2">
+                                    <span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-slate-50 px-2 text-xs text-slate-400 font-bold">支援體系</span>
+                                </div>
+
+                                <div class="flex flex-col gap-3 flex-grow">
+                                    <div id="ic_link_D600" onclick="toggleCompanyList('companyList_D600')" class="cursor-pointer bg-white border border-slate-200 hover:border-purple-400 hover:bg-purple-50 rounded-lg p-3 transition-all flex items-center gap-4 hover:-translate-x-1 shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="font-bold text-slate-700 text-sm leading-tight">生產製程及<br>檢測設備</h6>
+                                        </div>
+                                    </div>
+
+                                    <div id="ic_link_D700" onclick="toggleCompanyList('companyList_D700')" class="cursor-pointer bg-white border border-slate-200 hover:border-purple-400 hover:bg-purple-50 rounded-lg p-3 transition-all flex items-center gap-4 hover:-translate-x-1 shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-border-all"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="font-bold text-slate-700 text-sm">基板</h6>
+                                        </div>
+                                    </div>
+
+                                    <div id="ic_link_D800" onclick="toggleCompanyList('companyList_D800')" class="cursor-pointer bg-white border border-slate-200 hover:border-purple-400 hover:bg-purple-50 rounded-lg p-3 transition-all flex items-center gap-4 hover:-translate-x-1 shadow-sm">
+                                        <div class="w-10 h-10 rounded-full bg-purple-50 text-purple-500 flex items-center justify-center text-lg flex-shrink-0">
+                                            <i class="fa-solid fa-grip-lines"></i>
+                                        </div>
+                                        <div class="text-left">
+                                            <h6 class="font-bold text-slate-700 text-sm">導線架</h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-auto pt-4 border-t border-slate-200">
+                                    <div class="flex gap-4">
+                                        <div id="ic_link_DA00" onclick="toggleCompanyList('companyList_DA00')" class="flex-1 cursor-pointer bg-white border border-green-200 hover:border-green-500 hover:bg-green-50 rounded-lg p-3 text-center transition-all hover:-translate-y-1 shadow-sm">
+                                            <div class="text-green-500 font-bold text-sm">IC 模組</div>
+                                        </div>
+                                        <div id="ic_link_DB00" onclick="toggleCompanyList('companyList_DB00')" class="flex-1 cursor-pointer bg-white border border-green-200 hover:border-green-500 hover:bg-green-50 rounded-lg p-3 text-center transition-all hover:-translate-y-1 shadow-sm">
+                                            <div class="text-green-500 font-bold text-sm">IC 通路</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div id="companyList_D600" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">生產製程及檢測設備(下游)...</p>
+                    
+                </div>
+                
+                <div id="company-lists" class="mt-20 space-y-6 relative z-20">
+                    <h4 class="text-xl font-bold text-slate-700 pl-4 border-l-4 border-cyan-500 flex items-center gap-2">
+                        點擊上方圖表查看公司列表 <i class="fa-solid fa-hand-pointer text-cyan-500 animate-bounce"></i>
+                    </h4>
+                    
+                    <div id="companyList_DC00" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden ring-2 ring-cyan-100">
+                        <p class="font-bold text-slate-700 text-lg mb-4 flex items-center gap-2">
+                            <span class="w-2 h-2 rounded-full bg-cyan-500"></span>
+                            IP設計/IC設計代工服務 <span class="text-sm font-normal text-slate-500">(共22家)</span>
+                        </p>
+                        <div class="company-details">
+                            <h5 class="text-md font-bold text-slate-600 mb-3 bg-slate-50 p-2 rounded">本國上市公司 (7家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">凌陽</span>
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">智原</span>
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">創意</span>
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">全訊</span>
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">億而得-創</span>
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">晶心科</span>
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">芯鼎</span>
+                            </div>
+                            <h5 class="text-md font-bold text-slate-600 mb-3 bg-slate-50 p-2 rounded">外國上市公司 (1家)</h5>
+                            <div class="flex flex-wrap gap-2 mb-6">
+                                <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none border border-transparent">世芯-KY</span>
+                            </div>
+                            </div>
                     </div>
-                    <div id="companyList_D700" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">基板...</p>
+                    
+                    <div id="companyList_D300" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden ring-2 ring-blue-100">
+                        <p class="font-bold text-slate-700 text-lg mb-4 flex items-center gap-2">
+                             <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                             IC/晶圓製造 <span class="text-sm font-normal text-slate-500">(共50家)</span>
+                        </p>
+                        <div class="company-details">
+                             <h5 class="text-md font-bold text-slate-600 mb-3 bg-slate-50 p-2 rounded">晶圓製造 - 本國上市公司</h5>
+                             <div class="flex flex-wrap gap-2 mb-4">
+                                 <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none">聯電</span>
+                                 <a href="search.html" class="bg-cyan-500 hover:bg-cyan-600 text-white text-sm px-4 py-1.5 rounded-full transition-all duration-200 font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5">
+                                     台積電
+                                 </a>
+                                 <span class="bg-slate-100 text-slate-300 text-sm px-3 py-1.5 rounded-full cursor-not-allowed select-none">旺宏</span>
+                                 </div>
+                        </div>
                     </div>
-                    <div id="companyList_D800" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">導線架...</p>
-                    </div>
-                    <div id="companyList_D900" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">IC封裝測試...</p>
-                    </div>
-                    <div id="companyList_DA00" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">IC模組...</p>
-                    </div>
-                    <div id="companyList_DB00" class="company-list bg-slate-50 p-4 rounded-lg border border-slate-200 hidden">
-                        <p class="font-bold text-slate-700 text-lg mb-2">IC通路...</p>
-                    </div>
+
+                    <div id="companyList_D100" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">IC設計... (資料從缺)</p></div>
+                    <div id="companyList_D200" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">光罩... (資料從缺)</p></div>
+                    <div id="companyList_D400" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">生產設備... (資料從缺)</p></div>
+                    <div id="companyList_D500" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">化學品... (資料從缺)</p></div>
+                    <div id="companyList_D600" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">封測設備... (資料從缺)</p></div>
+                    <div id="companyList_D700" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">基板... (資料從缺)</p></div>
+                    <div id="companyList_D800" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">導線架... (資料從缺)</p></div>
+                    <div id="companyList_D900" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">封裝測試... (資料從缺)</p></div>
+                    <div id="companyList_DA00" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">IC模組... (資料從缺)</p></div>
+                    <div id="companyList_DB00" class="company-list bg-white p-6 rounded-xl border border-slate-200 shadow-sm hidden"><p class="font-bold text-slate-700">IC通路... (資料從缺)</p></div>
 
                 </div>
             </div>
@@ -243,7 +272,7 @@
 
     <script src="search.js"></script>
     <script>
-        // 原本的列表切換功能
+        // 列表切換功能
         function toggleCompanyList(listId) {
             const allLists = document.querySelectorAll('.company-list');
             allLists.forEach(list => {
