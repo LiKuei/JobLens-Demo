@@ -23,8 +23,8 @@
 
     <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2 cursor-pointer" onclick="window.location.href='index.html'">
-                <i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-2xl"></i>
+            <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+                <img src="icons/magnifying-glass.png" alt="Logo" class="w-8 h-8 object-contain">
                 <span class="text-xl font-bold tracking-wider">JobLens</span>
             </div>
             <div class="hidden md:flex items-center gap-6 text-sm font-medium">
@@ -63,10 +63,12 @@
             
             <div class="mt-6 md:mt-0 flex flex-col md:flex-row items-end md:items-center gap-3">
                 <a href="supply-chain.html" class="bg-blue-50 text-blue-700 hover:bg-blue-600 hover:text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm flex items-center gap-2 group border border-blue-200">
-                    <i class="fa-solid fa-sitemap"></i> 查看所屬產業鏈
+                    <img src="icons/value-chain.png" class="w-5 h-5 object-contain">
+                    查看所屬產業鏈
                 </a>
                 <a href="reviews.html" class="bg-purple-100 text-purple-700 hover:bg-purple-600 hover:text-white px-5 py-2.5 rounded-full font-bold text-sm transition-all shadow-sm flex items-center gap-2 group">
-                    <i class="fa-solid fa-robot group-hover:animate-bounce"></i> 查看 AI 輿情分析
+                    <img src="icons/robot.png" class="w-5 h-5 object-contain group-hover:animate-bounce">
+                    查看 AI 輿情分析
                 </a>
             </div>
         </div>
@@ -79,8 +81,8 @@
                 <a href="https://careers.tsmc.com/zh_TW/careers/SearchJobs" target="_blank" class="block group">
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex items-center justify-between hover:shadow-md hover:border-cyan-300 transition-all">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center text-red-600 text-xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-building"></i>
+                            <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform">
+                                <img src="icons/people.png" class="w-full h-full object-contain">
                             </div>
                             <div>
                                 <h4 class="font-bold text-base text-slate-800">台積電 官方招募網站</h4>
@@ -95,8 +97,8 @@
                 <a href="https://www.104.com.tw/company/a5h92m0?jobsource=google" target="_blank" class="block group">
                     <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-5 flex items-center justify-between hover:shadow-md hover:border-orange-300 transition-all">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center text-orange-500 text-xl group-hover:scale-110 transition-transform">
-                                <i class="fa-solid fa-briefcase"></i>
+                            <div class="w-12 h-12 bg-orange-50 rounded-full flex items-center justify-center p-2.5 group-hover:scale-110 transition-transform">
+                                <img src="icons/work.png" class="w-full h-full object-contain">
                             </div>
                             <div>
                                 <h4 class="font-bold text-base text-slate-800">104 人力銀行</h4>
@@ -127,8 +129,8 @@
                 </button>
             </div>
         </div>
-
-        <div class="min-h-[400px]"> <div id="tab-jobs" class="tab-content active">
+        <div class="min-h-[400px]"> 
+            <div id="tab-jobs" class="tab-content active">
                 <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden mt-6">
                     <div class="px-6 py-4 border-b border-slate-100 bg-slate-50 flex justify-between items-center">
                         <h4 class="font-bold text-slate-700">職缺列表</h4>
@@ -155,7 +157,8 @@
                     <div class="md:col-span-8 bg-white rounded-xl shadow-sm p-6 border border-slate-100">
                         <div class="flex justify-between items-center mb-6">
                             <h4 class="text-lg font-bold flex items-center gap-2">
-                                <i class="fa-solid fa-sack-dollar text-yellow-500"></i> 年度薪資結構
+                                <img src="icons/money.png" class="w-6 h-6 object-contain">
+                                年度薪資結構
                             </h4>
                             <span class="text-xs bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full font-bold">對象：非主管全時員工</span>
                         </div>
@@ -201,7 +204,9 @@
 
                     <div class="md:col-span-4 flex flex-col gap-6">
                         <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 flex-1">
-                            <h4 class="text-lg font-bold flex items-center gap-2 mb-4"><i class="fa-solid fa-users text-purple-500"></i> 職場環境</h4>
+                            <h4 class="text-lg font-bold flex items-center gap-2 mb-4">
+                                <img src="icons/people.png" class="w-5 h-5 object-contain"> 職場環境
+                            </h4>
                             <div class="flex items-center justify-between mb-2">
                                 <span class="text-sm text-slate-600">女性主管佔比</span>
                                 <span class="font-bold text-purple-600">14.6%</span>
@@ -209,7 +214,9 @@
                             <div class="w-full bg-slate-100 rounded-full h-2"><div class="bg-purple-500 h-2 rounded-full" style="width: 14.6%"></div></div>
                         </div>
                          <div class="bg-white rounded-xl shadow-sm p-6 border border-slate-100 flex-1">
-                            <h4 class="text-lg font-bold flex items-center gap-2 mb-4"><i class="fa-solid fa-gavel text-slate-600"></i> 風險快篩</h4>
+                            <h4 class="text-lg font-bold flex items-center gap-2 mb-4">
+                                <img src="icons/danger.png" class="w-5 h-5 object-contain"> 風險快篩
+                            </h4>
                             <p class="text-xs text-slate-500 flex items-center gap-2">
                                 <i class="fa-solid fa-circle-check text-green-500"></i> 反競爭行為：無裁罰紀錄。
                             </p>
@@ -242,24 +249,24 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                         <div class="bg-orange-50 p-6 rounded-xl border border-orange-100 flex flex-col items-center justify-center text-center hover:shadow-md transition cursor-default">
-                            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-xl mb-3">
-                                <i class="fa-solid fa-user-injured"></i>
+                            <div class="w-12 h-12 rounded-full bg-orange-100 flex items-center justify-center mb-3 p-2.5">
+                                <img src="icons/injury.png" class="w-full h-full object-contain">
                             </div>
                             <h5 class="text-slate-500 text-xs font-bold mb-1 uppercase">職業災害人數</h5>
                             <p class="text-3xl font-bold text-slate-800" id="safety-count">-</p>
                             <p class="text-xs text-slate-400 mt-2">人</p>
                         </div>
                         <div class="bg-blue-50 p-6 rounded-xl border border-blue-100 flex flex-col items-center justify-center text-center hover:shadow-md transition cursor-default">
-                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-xl mb-3">
-                                <i class="fa-solid fa-percent"></i>
+                            <div class="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center mb-3 p-2.5">
+                                <img src="icons/ratio.png" class="w-full h-full object-contain">
                             </div>
                             <h5 class="text-slate-500 text-xs font-bold mb-1 uppercase">職業災害比率</h5>
                             <p class="text-3xl font-bold text-slate-800" id="safety-rate">-</p>
                             <p class="text-xs text-slate-400 mt-2">占員工總人數</p>
                         </div>
                         <div class="bg-red-50 p-6 rounded-xl border border-red-100 flex flex-col items-center justify-center text-center hover:shadow-md transition cursor-default">
-                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center text-red-600 text-xl mb-3">
-                                <i class="fa-solid fa-fire"></i>
+                            <div class="w-12 h-12 rounded-full bg-red-100 flex items-center justify-center mb-3 p-2.5">
+                                <img src="icons/fire.png" class="w-full h-full object-contain">
                             </div>
                             <h5 class="text-slate-500 text-xs font-bold mb-1 uppercase">火災件數</h5>
                             <p class="text-3xl font-bold text-slate-800" id="safety-fire">-</p>
@@ -270,8 +277,8 @@
                             <div class="h-full rounded-xl bg-slate-800 p-1 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-all duration-300">
                                 <div class="h-full rounded-lg bg-gradient-to-br from-slate-800 to-slate-900 border border-slate-700 p-6 flex flex-col items-center justify-center text-center relative overflow-hidden">
                                     <div class="absolute top-0 right-0 w-24 h-24 bg-cyan-600/10 rounded-full blur-2xl -mr-10 -mt-10 transition group-hover:bg-cyan-600/20"></div>
-                                    <div class="w-14 h-14 rounded-full bg-cyan-600/20 border border-cyan-600/30 flex items-center justify-center text-cyan-400 text-2xl mb-4 group-hover:scale-110 group-hover:bg-cyan-600 group-hover:text-white transition-all duration-300 shadow-lg shadow-emerald-900/50">
-                                        <i class="fa-solid fa-chart-pie"></i>
+                                    <div class="w-14 h-14 rounded-full bg-cyan-600/20 border border-cyan-600/30 flex items-center justify-center mb-4 group-hover:scale-110 group-hover:bg-cyan-600 transition-all duration-300 shadow-lg shadow-emerald-900/50 p-3">
+                                        <img src="icons/renewable-energy.png" class="w-full h-full object-contain">
                                     </div>
                                     <h5 class="text-slate-400 text-xs font-bold mb-1 uppercase tracking-widest">ESG 專區</h5>
                                     <p class="text-xl font-bold text-white mb-3">環境儀表板</p>
@@ -326,18 +333,14 @@
     <script>
         // Tab 切換邏輯
         function switchTab(tabId) {
-            // 隱藏所有 tab 內容
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
-            // 移除所有按鈕 active 狀態
             document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
-            
-            // 顯示目標 tab
             document.getElementById(`tab-${tabId}`).classList.add('active');
-            // 啟用目標按鈕
             document.getElementById(`tab-btn-${tabId}`).classList.add('active');
         }
 
         // --- 1. 職缺資料 ---
+        // (略微縮減資料以節省空間，請保留您原本的完整數據)
         const jobData = [
             { title: "儲備模組副工程師 (台南)", link: "https://www.104.com.tw/job/76avm", salary: "待遇面議" },
             { title: "廠務助理工程師(裝機工程)", link: "https://www.104.com.tw/job/7g7h8", salary: "月薪33,800以上" },
@@ -386,8 +389,9 @@
                     <div class="mb-4">
                         <h5 class="font-bold text-slate-800 text-lg mb-3 line-clamp-2 h-[3.5rem]">${job.title}</h5>
                         <div class="flex items-center text-sm text-slate-500 font-medium">
-                            <span class="bg-slate-50 border border-slate-100 px-3 py-1 rounded-full text-slate-600">
-                                <i class="fa-solid fa-money-bill-1 mr-1 text-cyan-600"></i> ${job.salary}
+                            <span class="bg-slate-50 border border-slate-100 px-3 py-1 rounded-full text-slate-600 flex items-center">
+                                <img src="icons/money.png" class="w-4 h-4 mr-1 object-contain">
+                                ${job.salary}
                             </span>
                         </div>
                     </div>
@@ -441,7 +445,7 @@
             marker.style.left = (companyMedian / maxVal) * 100 + '%';
 
             if (inputVal < companyMedian) {
-                feedback.innerHTML = `您的期望薪資落在該公司的 <span class="font-bold text-blue-600">後 30%</span> 區間。`;
+                feedback.innerHTML = `您的期望薪資約落在該公司的 <span class="font-bold text-blue-600">後 30%</span> 區間。`;
             } else {
                 feedback.innerHTML = `您的期望薪資 <span class="font-bold text-cyan-700">高於中位數</span> 水準。`;
             }
