@@ -20,7 +20,7 @@
     <nav class="bg-slate-900 text-white p-4 shadow-lg sticky top-0 z-50">
         <div class="container mx-auto flex justify-between items-center">
             <div class="flex items-center gap-2">
-                <i class="fa-solid fa-magnifying-glass-chart text-emerald-400 text-2xl"></i>
+                <i class="fa-solid fa-magnifying-glass-chart text-cyan-400 text-2xl"></i>
                 <span class="text-xl font-bold tracking-wider">JobLens <span class="text-xs font-normal text-slate-400">beta</span></span>
             </div>
         </div>
@@ -34,10 +34,10 @@
             <div class="relative max-w-xl mx-auto mb-16">
                 <input type="text" id="searchInput" autocomplete="off"
                        placeholder="輸入公司代號或名稱 (例如：2330, 台積電)" 
-                       class="w-full p-4 pl-6 rounded-full text-slate-900 shadow-2xl focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition text-lg">
+                       class="w-full p-4 pl-6 rounded-full text-slate-900 shadow-2xl focus:outline-none focus:ring-4 focus:ring-cyan-600/50 transition text-lg">
                 
                 <button onclick="window.location.href='search.html'" 
-                        class="absolute right-2 top-2 bg-emerald-500 hover:bg-emerald-600 text-white px-8 py-2.5 rounded-full transition font-bold text-lg shadow-lg">
+                        class="absolute right-2 top-2 bg-cyan-600 hover:bg-emerald-600 text-white px-8 py-2.5 rounded-full transition font-bold text-lg shadow-lg">
                     透視
                 </button>
 
@@ -178,7 +178,7 @@
                         <span class="font-bold text-slate-700 group-hover:text-emerald-700">${item.fullName}</span>
                         <span class="text-xs text-slate-400 ml-1">(${item.name})</span>
                     </div>
-                    <span class="text-xs text-slate-400 border border-slate-200 px-2 py-0.5 rounded-full group-hover:border-emerald-200 group-hover:text-emerald-500">${item.industry}</span>
+                    <span class="text-xs text-slate-400 border border-slate-200 px-2 py-0.5 rounded-full group-hover:border-emerald-200 group-hover:text-cyan-600">${item.industry}</span>
                 </div>
             `).join('');
             suggestionBox.innerHTML = html;
